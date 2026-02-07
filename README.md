@@ -1,54 +1,56 @@
 # TD-DyUn: Dynamic Uncertainty-Aware Dataset Pruning
 
-This repository accompanies the paper:
-
-**Large-Scale Dataset Pruning Using Dynamic Uncertainty-Aware Scoring**
-
-## 📌 Overview
-Training deep neural networks on large-scale datasets is computationally expensive and often inefficient due to redundant or weakly informative samples.  
-**TD-DyUn** is a dynamic, uncertainty-aware dataset pruning framework that identifies and removes low-impact samples during training while preserving model performance.
-
-The method leverages:
-- Temporal dynamics of model outputs
-- Predictive uncertainty evolution
-- Distributional instability via temporally smoothed KL-divergence
-
-TD-DyUn enables substantial data reduction with minimal accuracy degradation, making it suitable for large-scale and resource-constrained training scenarios.
+This repository presents **TD-DyUn**, a dynamic uncertainty-aware framework for dataset pruning in deep learning.
 
 ---
 
-## 🧠 Key Contributions
-- **Dynamic sample scoring** based on temporal uncertainty, rather than static heuristics  
-- **Dual-depth temporal analysis** combining short-term instability and long-term learning trends  
+## Overview
+Training deep neural networks on large-scale datasets is increasingly expensive in terms of computation, memory, and energy, while performance gains often saturate.  
+TD-DyUn addresses this challenge by **dynamically identifying and removing low-impact training samples during training**, while preserving model performance and training stability.
+
+The method exploits:
+- Temporal dynamics of model predictions
+- Predictive uncertainty evolution across epochs
+- Distributional instability measured via temporally smoothed divergence
+
+This enables efficient dataset reduction with minimal accuracy degradation.
+
+---
+
+## Key Contributions
+- **Dynamic sample importance scoring** based on temporal uncertainty rather than static heuristics  
+- **Dual-depth temporal analysis** capturing both short-term instability and long-term learning behavior  
 - **Importance-weighted retraining** to compensate for aggressive data pruning  
-- Strong empirical performance on **CIFAR-10** and **CIFAR-100** across multiple architectures
+- Strong empirical performance on CIFAR-10 and CIFAR-100 across multiple architectures
 
 ---
 
-## 📄 Paper
+## Paper
 **Large-Scale Dataset Pruning Using Dynamic Uncertainty-Aware Scoring**  
-Bahar Niknam, Hedieh Sajedi  
-Department of Computer Science, University of Tehran  
 
-📎 PDF: [`TD_DyUn_Paper.pdf`](./paper/TD_DyUn_Paper.pdf)
+*Manuscript in preparation.*
+
+This repository is intended to accompany the manuscript and provide an overview of the proposed method.
 
 ---
 
-## 🧩 Method Summary
-TD-DyUn operates in two phases:
+## Method Summary
+TD-DyUn operates in two main phases:
 
 ### Phase I: Importance Estimation
 - Train the model on the full dataset
-- Record logits for all samples across epochs
+- Record logits for all training samples across epochs
 - Compute:
-  - Weighted Dynamic Uncertainty (correct-class probability fluctuation)
-  - Temporally Smoothed Dual-Depth Score (distributional instability)
+  - Weighted Dynamic Uncertainty (fluctuations of correct-class probability)
+  - Temporally Smoothed Dual-Depth Score (instability of output distributions)
 
-### Phase II: Pruning & Retraining
-- Rank samples based on combined importance score
-- Retain top $(1 - p)$ fraction of data
-- Retrain the model using importance-weighted loss
+### Phase II: Pruning and Retraining
+- Rank samples based on the combined TD-DyUn importance score
+- Retain the top $(1 - p)$ fraction of training samples
+- Retrain the model from scratch using an importance-weighted loss
 
 ---
 
-## 🏗 Repository Structure
+## Repository Status
+This repository currently contains documentation only.
+
